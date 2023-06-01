@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+jupyter = "==1.0.0"
+cfscrape = "==2.1.1"
+requests = "==2.30.0"
+urllib3 = "==1.26"
+feedparser = "*"
+lxml = "*"
+pytz = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
+python_full_version = "3.10.10"
