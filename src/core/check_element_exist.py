@@ -1,9 +1,8 @@
-from functools import wraps
 import logging
+from functools import wraps
 
-logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
-logging.basicConfig(format='%(asctime)s %(levelname)s:%(message)s', level=logging.DEBUG, datefmt='%I:%M:%S')
+logger = logging.getLogger(__name__)
+
 
 def check_element_exist(f):
     @wraps(f)
@@ -11,8 +10,9 @@ def check_element_exist(f):
         try:
             result = f(*args, **kwargs)
             return result
-        except AttributeError:
+        except Exception:
             logger.error(f'Article {args[1]} has no searched element')
             result = ''
             return result
+
     return func

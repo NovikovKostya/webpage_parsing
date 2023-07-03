@@ -1,10 +1,9 @@
 import typing as t
-import os
+from sqlite3 import Connection
 
 
-def load_cached_articles(saved_articles_file) -> t.Set[str]:
-    if not os.path.exists(saved_articles_file):
-        return set()
-
-    with open(saved_articles_file, 'rt', encoding='utf-8') as file:
-        return set(line.strip() for line in file.readlines())
+def load_cached_articles(db_conn: Connection) -> t.Set[str]:
+    cur = db_conn.cursor()
+    cur.execute('SELECT href FROM article_links')
+    article_links_from_db = cur.fetchall()
+    return set(link[0] for link in article_links_from_db)
